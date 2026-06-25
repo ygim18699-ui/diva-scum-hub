@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIVA SCUM HUB v2</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="bg"></div>
+
+<nav class="topbar">
+    <div class="logo">DIVA<span>SCUM</span>HUB</div>
+    <div class="nav-actions">
+        <button onclick="scrollToSection('servers')" data-key="nav_servers">서버</button>
+        <button onclick="scrollToSection('board')" data-key="nav_board">게시판</button>
+        <button onclick="changeLang('ko')">KR</button>
+        <button onclick="changeLang('en')">EN</button>
+        <button onclick="changeLang('ja')">JP</button>
+    </div>
+</nav>
+
+<header class="hero">
+    <p class="eyebrow">SCUM COMMUNITY NETWORK</p>
+    <h1 data-key="title">DIVA SCUM HUB</h1>
+    <p data-key="subtitle">서버 설정 공유 · 서버 홍보 · 설정 진단 · 커뮤니티 게시판</p>
+</header>
+
+<main class="layout">
+    <section class="panel register-panel" id="servers">
+        <h2 data-key="server_register">📝 서버 등록</h2>
+        <div class="grid two">
+            <input id="serverName" data-placeholder="server_name" placeholder="서버 이름">
+            <input id="serverIp" data-placeholder="server_ip" placeholder="서버 IP">
+            <input id="serverCountry" data-placeholder="country" placeholder="국가 예: KR / JP / US">
+            <select id="serverMode">
+                <option value="PvP">PvP</option>
+                <option value="PvE">PvE</option>
+                <option value="Mixed">Mixed</option>
+                <option value="RP">RP</option>
+                <option value="Hardcore">Hardcore</option>
+            </select>
+        </div>
+        <input id="serverDiscord" data-placeholder="discord" placeholder="디스코드 주소">
+        <textarea id="serverDescription" data-placeholder="description" placeholder="서버 설명"></textarea>
+        <div class="grid two">
+            <input id="lootRate" data-placeholder="loot_rate" placeholder="루팅 배율 예: 3x">
+            <input id="zombieRate" data-placeholder="zombie_rate" placeholder="좀비 배율 예: 2x">
+            <input id="vehicleRate" data-placeholder="vehicle_rate" placeholder="차량 배율 예: 1.5x">
+            <input id="maxPlayers" data-placeholder="max_players" placeholder="최대 인원 예: 64">
+        </div>
+        <label class="file-label" data-key="settings_file">설정파일 업로드</label>
+        <input type="file" id="settingsFile">
+        <button class="neon-btn" onclick="addServer()" data-key="register_btn">등록하기</button>
+        <p id="serverMessage" class="message"></p>
+    </section>
+
+    <section class="panel list-panel">
+        <div class="section-head">
+            <h2 data-key="server_list">📡 서버 목록</h2>
+            <button class="mini-btn" onclick="loadServers()">REFRESH</button>
+        </div>
+        <div class="grid two compact">
+            <input id="serverSearch" data-placeholder="server_search" placeholder="서버 검색" oninput="loadServers()">
+            <select id="modeFilter" onchange="loadServers()">
+                <option value="all">ALL</option>
+                <option value="PvP">PvP</option>
+                <option value="PvE">PvE</option>
+                <option value="Mixed">Mixed</option>
+                <option value="RP">RP</option>
+                <option value="Hardcore">Hardcore</option>
+            </select>
+        </div>
+        <div id="serverList"></div>
+    </section>
+
+    <section class="panel board-panel" id="board">
+        <div class="section-head">
+            <h2 data-key="board_title">💬 커뮤니티 게시판</h2>
+            <button class="mini-btn" onclick="loadPosts()">REFRESH</button>
+        </div>
+
+        <div class="tabs">
+            <button onclick="setCategory('all')">ALL</button>
+            <button onclick="setCategory('notice')">NOTICE</button>
+            <button onclick="setCategory('free')">FREE</button>
+            <button onclick="setCategory('question')">Q&A</button>
+            <button onclick="setCategory('promotion')">PROMO</button>
+        </div>
+
+        <div class="grid two compact">
+            <select id="postCategory">
+                <option value="free">FREE</option>
+                <option value="notice">NOTICE</option>
+                <option value="question">Q&A</option>
+                <option value="promotion">PROMO</option>
+            </select>
+            <input id="postSearch" data-placeholder="post_search" placeholder="게시글 검색" oninput="loadPosts()">
+        </div>
+
+        <input id="postTitle" data-placeholder="post_title" placeholder="제목">
+        <input id="postAuthor" data-placeholder="post_author" placeholder="작성자">
+        <textarea id="postContent" data-placeholder="post_content" placeholder="내용"></textarea>
+        <button class="neon-btn pink" onclick="addPost()" data-key="post_btn">글 등록</button>
+        <p id="postMessage" class="message"></p>
+
+        <div class="board-grid">
+            <div id="postList"></div>
+            <div id="postDetail" class="sticky-detail"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>DIVA SCUM HUB v2 · Cyberpunk community prototype</p>
+</footer>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>
